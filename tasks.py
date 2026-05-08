@@ -73,7 +73,7 @@ class Menu:
 
         status = input("Status: ").strip()
         if not status:
-            status = "pending"
+            status = "Pending"
 
         Task.addTask(name, int(time_input), status)
         print("Task added successfully.")
@@ -120,6 +120,8 @@ class Menu:
         tasks = Task.getTasks()
         self.viewTasks()
 
+        if not tasks:
+            return
         choice = input("Enter the task number to edit: ")
 
         if not choice.isdigit():
@@ -163,9 +165,7 @@ class Menu:
         elif choice == "status":
             new_status = input("Enter new status: ").strip()
             if not new_status:
-                print("\n")
-                print("Status cannot be empty.")
-                self.editTasks()
+                tasks[index].status = "Pending"
             tasks[index].status = new_status
             print("\n")
             print("Task status updated successfully.")

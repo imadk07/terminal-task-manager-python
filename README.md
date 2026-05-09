@@ -10,6 +10,8 @@ A terminal-based task manager built with Python using object-oriented programmin
 - Remove tasks
 - Input validation
 - Menu-driven CLI interface
+- Save tasks to JSON
+- Load tasks from JSON
 
 ## Concepts Used
 
@@ -21,6 +23,10 @@ A terminal-based task manager built with Python using object-oriented programmin
 - Validation
 - Loops & Conditionals
 - String Representations (`__str__`, `__repr__`)
+- JSON Serialization & Persistence
+- File Handling
+- `__dict__`
+- `**` Unpacking
 
 ## Technologies
 
@@ -34,7 +40,7 @@ python3 tasks.py
 
 ## Future Improvements
 
-- Save tasks to JSON
+- Save tasks to JSON (Complete)
 - Due dates
 - Task priorities
 - GUI version

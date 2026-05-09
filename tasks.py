@@ -1,3 +1,5 @@
+import json
+
 class Task:
     tasks = []
 
@@ -14,7 +16,11 @@ class Task:
 
     @classmethod
     def getTasks(cls):
+        with open("tasks.json", "r") as file:
+            data = json.load(file)
+            cls.tasks = [cls(**task) for task in data]
         return cls.tasks
+
 
     @classmethod
     def removeTask(cls, index):
@@ -26,6 +32,21 @@ class Task:
     def __repr__(self):
         return self.__str__()
 
+    @classmethod
+    def saveTasks(cls):
+        with open("tasks.json", "w") as file:
+            data = [task.__dict__ for task in cls.tasks]
+            json.dump(data, file, indent=4)
+    
+    @classmethod
+    def loadTasks(cls):
+        try: 
+            with open("tasks.json", "r") as file:
+                
+                data = json.load(file)
+                cls.tasks = [cls(**task) for task in data]
+        except FileNotFoundError:
+            cls.tasks = []
 
 class Menu:
     def __init__(self):
@@ -77,6 +98,7 @@ class Menu:
 
         Task.addTask(name, int(time_input), status)
         print("Task added successfully.")
+        Task.saveTasks()
 
     def viewTasks(self):
         tasks = Task.getTasks()
@@ -115,6 +137,7 @@ class Menu:
         removed = Task.removeTask(index)
         print("\n")
         print(f"Removed task: {removed.name}")
+        Task.saveTasks()
     
     def editTasks(self):
         tasks = Task.getTasks()
@@ -174,6 +197,7 @@ class Menu:
             print("Invalid field name. Please enter 'task', 'time', or 'status'.")
             self.editTasks()
         self.viewTasks()
+        Task.saveTasks()
 
 
 
